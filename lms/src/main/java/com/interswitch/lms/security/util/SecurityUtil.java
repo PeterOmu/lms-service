@@ -3,14 +3,16 @@ package com.interswitch.lms.security.util;
 import com.interswitch.lms.entity.Auth;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Objects;
+
 public class SecurityUtil {
 
     public static Auth getCurrentUser() {
 
-        Object principal = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+        Object principal = Objects.requireNonNull(SecurityContextHolder
+                        .getContext()
+                        .getAuthentication())
+                        .getPrincipal();
 
         if (principal instanceof Auth) {
             return (Auth) principal;

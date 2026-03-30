@@ -1,18 +1,21 @@
 package com.interswitch.lms.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "departments")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Department {
 
     @Id
@@ -33,7 +36,6 @@ public class Department {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // One department can have many students
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private List<Student> students;
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Student> students = new ArrayList<>();
 }

@@ -126,6 +126,7 @@
 package com.interswitch.lms.controller;
 
 import com.interswitch.lms.dto.request.AuthRequestDTO;
+import com.interswitch.lms.dto.request.LoginRequestDTO;
 import com.interswitch.lms.dto.request.RegisterRequestDTO;
 import com.interswitch.lms.dto.response.AuthResponseDTO;
 import com.interswitch.lms.dto.response.HealthResponseDTO;
@@ -155,25 +156,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequestDTO request) {
-        try {
-            // This is where authentication happens
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            request.getEmail(),
-                            request.getPassword()
-                    )
-            );
-
-            // If no exception → credentials are valid
-            AuthResponseDTO response = authService.authenticate(request);
-            return ResponseEntity.ok(response);
-
-        } catch (Exception e) {
-            throw new InvalidCredentialsException("Invalid email or password.");
-        }
+    public ResponseEntity<AuthResponseDTO> loginUser(@RequestBody @Valid AuthRequestDTO loginRequest) {
+        return ResponseEntity.ok(authService.loginUser(loginRequest));
     }
-
     @GetMapping("/health")
     public HealthResponseDTO healthCheck() {
         return HealthResponseDTO.builder()

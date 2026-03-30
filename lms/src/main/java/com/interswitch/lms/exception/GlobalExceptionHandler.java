@@ -1,6 +1,6 @@
 package com.interswitch.lms.exception;
 
-import com.interswitch.lms.dto.ApiResponse;
+import com.interswitch.lms.dto.response.ApiResponse;
 import com.interswitch.lms.exception.auth.ForbiddenException;
 import com.interswitch.lms.exception.auth.TokenExpiredException;
 import com.interswitch.lms.exception.auth.UnauthorizedException;
@@ -80,6 +80,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.FORBIDDEN, ex.getMessage(), null);
     }
 
+@ExceptionHandler({ AccessDeniedException.class })
+    public ResponseEntity<ApiResponse<String>> handleAccessDenied(AccessDeniedException ex) {
+        return buildResponse(HttpStatus.FORBIDDEN, ex.getMessage(), null);
+    }
+
     @ExceptionHandler(SubmissionNotFoundException.class)
     public ResponseEntity<ApiResponse<String>> handleSubmissionNotFound(SubmissionNotFoundException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), null);
@@ -111,4 +116,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleGeneric(Exception ex) {
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error: " + ex.getMessage(), null);
     }
+
+
 }

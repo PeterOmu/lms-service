@@ -7,13 +7,6 @@ import com.interswitch.lms.dto.response.AuthResponseDTO;
 
 public interface AuthService {
 
-    /**
-     * Registers a new user (student, teacher, or admin)
-     */
     AuthResponseDTO register(RegisterRequestDTO request);
-
-    /**
-     * Authenticates a user and returns JWT token
-     */
-    AuthResponseDTO authenticate(AuthRequestDTO request);
+    AuthResponseDTO loginUser(AuthRequestDTO request);
 }

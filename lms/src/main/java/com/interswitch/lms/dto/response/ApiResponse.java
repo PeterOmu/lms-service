@@ -1,32 +1,55 @@
-package com.interswitch.lms.dto;
+package com.interswitch.lms.dto.response;   // Recommended package
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ApiResponse<T> {
-    private String status; // "success" or "error"
+
+    private String status;
     private String message;
     private T data;
 
-    public ApiResponse() {}
+    // ==================== Factory Methods ====================
 
-    public ApiResponse(String status, String message, T data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
+    /**
+     * Success response with message and data
+     */
+    public static <T> ApiResponse<T> success(String message, T data) {
+        return ApiResponse.<T>builder()
+                .status("success")
+                .message(message)
+                .data(data)
+                .build();
     }
 
-    // Factory methods for convenience
-    public static <T> ApiResponse<T> success(T data, String message) {
-        return new ApiResponse<>("success", message, data);
+    /**
+     * Success response with data only (uses default message)
+     */
+    public static <T> ApiResponse<T> success(T data) {
+        return success("Operation completed successfully", data);
     }
 
+    /**
+     * Error response
+     */
     public static <T> ApiResponse<T> error(String message, T data) {
-        return new ApiResponse<>("error", message, data);
+        return ApiResponse.<T>builder()
+                .status("error")
+                .message(message)
+                .data(data)
+                .build();
     }
 
-    // Getters & setters
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
-    public T getData() { return data; }
-    public void setData(T data) { this.data = data; }
+    /**
+     * Simple error response with message only
+     */
+    public static <T> ApiResponse<T> error(String message) {
+        return error(message, null);
+    }
 }
