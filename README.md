@@ -14,14 +14,6 @@ The **Learning Management System (LMS)** is a backend application designed to ma
 9. [Contributing](#contributing)
 10. [License](#license)
 
----
-
-## Overview
-The **LMS Application** is a full-featured backend service for managing courses, teachers, students, and departments. It supports role-based authentication, course creation, and management, allowing institutions to manage learning materials efficiently.
-
-The application exposes RESTful APIs for **students, teachers, and administrators**, and follows clean architecture principles for maintainability and scalability.
-
----
 
 ## Tech Stack
 - **Backend Framework:** Spring Boot (4.x)
