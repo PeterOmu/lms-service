@@ -1,4 +1,6 @@
 # Learning Management System (LMS) Application
+The **Learning Management System (LMS)** is a backend application designed to manage courses, teachers, students, and departments efficiently. It provides RESTful APIs for course creation, enrollment, and management, with role-based authentication to control access for admins, teachers, and students. The system is built for scalability, maintainability, and easy integration with frontend platforms.
+
 
 ## Table of Contents
 1. [Overview](#overview)
